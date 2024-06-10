@@ -1,0 +1,43 @@
+Task: Asp.net core web api in REST api using Entity Framework core (Code First Approach) and SQL server
+Channel Name: Manoj deshwal
+Link: https://youtu.be/Fp6s89A136Q?si=7exKvdDJtwE5kcKI
+
+1. create a new Project and select "Asp.net Core web api".
+2. create a folder name as "Models" and add a class in the folder name as "Brand". 
+3. add property in the brand class.
+		public class Brand
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Category { get; set; }
+        public int IsActive { get; set; }
+    }
+	
+4. install all below required packages:
+	1. EntityFrameworkCore
+	2. EntityFrameworkCore.tools
+	3. EntityFrameworkCore.Sqlserver
+	
+5. create a DbContext class name as "BrandContext" in the model folder.
+
+6. add connection string appsettigs.json file
+
+7. Add DbContext in IOC container (Program.cs) file.
+	// Add services to the container.
+	builder.Services.AddDbContext<BrandContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("BrandCS")));
+	
+8. add a migration folder
+	1. add-migration initial (create database schema)
+	2. update-database
+	
+9. Add one controller, go to left side   ->  Common ->  API ->  API Controller empty -> name as "BrandController".
+	and add dbcontext in the controller
+	
+	private readonly BrandContext _dbContext;
+        public BrandController(BrandContext dbContext)
+        {
+            _dbContext = dbContext;
+        }
+		
+		
+10. create action method in controller.
